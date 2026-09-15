@@ -119,14 +119,16 @@
       border-top: 1px solid var(--border-color);
       background-color: var(--card-bg);
       padding: 3rem 2rem;
-      text-align: center;
-      color: var(--text-secondary);
     }
 
     .footer-content { max-width: 1200px; margin: 0 auto; }
-    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .footer-links a { color: var(--accent-color); text-decoration: none; transition: color 0.3s; }
-    .footer-links a:hover { color: var(--text-primary); }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-section h4 { color: var(--accent-color); margin-bottom: 1rem; font-weight: 700; }
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 0.5rem; }
+    .footer-section a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
+    .footer-section a:hover { color: var(--accent-color); }
+    .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem; }
 
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
@@ -140,7 +142,7 @@
 <body>
 
   <header>
-    <a href="#" class="brand">HACYBER<span>GLOBALTECH</span></a>
+    <a href="/" class="brand">HACYBER<span>GLOBALTECH</span></a>
     <nav>
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -220,7 +222,7 @@
     </section>
   </div>
 
-  <section class="container">
+  <section class="container" id="contact">
     <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 3rem; text-align: center;">
       <h2 style="font-size: 2rem; margin-bottom: 1rem;">Ready to Get Started?</h2>
       <p style="color: var(--text-secondary); margin-bottom: 2rem;">Let's discuss your project and find the perfect solution.</p>
@@ -233,14 +235,40 @@
 
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-links">
-        <a href="https://hacyberglobal.dgdns.org/support" target="_blank">Support</a>
-        <a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/" target="_blank">Legal Documents</a>
-        <a href="mailto:hacybertech@gmail.com">Email Us</a>
-        <a href="#" onclick="scrollToTop()">Back to Top</a>
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h4>🔗 Quick Links</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://hacyberglobal.dgdns.org/support" target="_blank">Support Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>📋 Legal & Compliance</h4>
+          <ul>
+            <li><a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/privacy-policy.html" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/terms-of-service.html" target="_blank">Terms of Service</a></li>
+            <li><a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/" target="_blank">Legal Portal</a></li>
+            <li><a href="#" onclick="scrollToLicense()">License (GPL v3.0)</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>📞 Contact Info</h4>
+          <ul>
+            <li><a href="mailto:hacybertech@gmail.com">Email: hacybertech@gmail.com</a></li>
+            <li>Support: 24/7 Available</li>
+            <li><a href="https://hacyberglobal.dgdns.org/support" target="_blank">Help Center</a></li>
+            <li><a href="https://github.com/hacybertech-pixel/web-hacyberglobal" target="_blank">GitHub Repo</a></li>
+          </ul>
+        </div>
       </div>
-      <p>&copy; 2026 HACYBERGLOBALTECH. All rights reserved.</p>
-      <p>Secure | Reliable | Professional Technical Services</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HACYBERGLOBALTECH. All rights reserved.</p>
+        <p>Licensed under GNU General Public License v3.0 • Secure | Reliable | Professional</p>
+        <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-secondary);">Web Deployment & Technical Services | <a href="https://github.com/hacybertech-pixel" target="_blank" style="color: var(--accent-color);">GitHub Organization</a></p>
+      </div>
     </div>
   </footer>
 
@@ -259,24 +287,25 @@
       }
     }
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function scrollToLicense() {
+      alert('License: GNU General Public License v3.0\n\nThis software is free to use, modify, and distribute under the terms of the GPL v3.0 license.\n\nFor full license text, visit: https://github.com/hacybertech-pixel/web-hacyberglobal/blob/main/LICENSE\n\nCopyright © 2026 HACYBERGLOBALTECH');
     }
 
-    // Load saved theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       document.body.setAttribute('data-theme', 'light');
       document.getElementById('themeToggle').textContent = '🌙';
     }
 
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const href = this.getAttribute('href');
+        if (href === '#services' || href === '#about' || href === '#contact') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       });
     });
