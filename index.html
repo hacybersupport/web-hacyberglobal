@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HACYBERGLOBALTECH - Web Software Deployment, Application Setup & Digital Workflow Support">
+  <meta name="keywords" content="web deployment, application setup, technical services, digital solutions">
+  <meta name="author" content="HACYBERGLOBALTECH">
+  <title>HACYBERGLOBALTECH | Web Deployment & Technical Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent-color: #38bdf8;
+      --accent-dark: #0284c7;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-color: #334155;
+      --highlight-bg: rgba(56, 189, 248, 0.08);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --accent-color: #0284c7;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --border-color: #e2e8f0;
+      --highlight-bg: rgba(2, 132, 199, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-primary); line-height: 1.7; transition: all 0.3s ease; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color); padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    [data-theme="light"] header { background-color: rgba(248, 250, 252, 0.95); }
+
+    .brand { font-size: 1.35rem; font-weight: 800; color: var(--text-primary); text-decoration: none; }
+    .brand span { color: var(--accent-color); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    nav a:hover { color: var(--accent-color); }
+
+    .theme-toggle { background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 0.875rem; transition: all 0.3s; }
+    .theme-toggle:hover { border-color: var(--accent-color); }
+
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(2, 132, 199, 0.1) 100%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-color), var(--accent-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+    .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 0.875rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; font-size: 1rem; }
+    .btn-primary { background-color: var(--accent-color); color: var(--bg-color); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3); }
+    .btn-secondary { border: 2px solid var(--accent-color); color: var(--accent-color); background: transparent; }
+    .btn-secondary:hover { background-color: var(--highlight-bg); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+    .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; text-align: center; }
+    .section-subtitle { font-size: 1.1rem; color: var(--text-secondary); text-align: center; margin-bottom: 2rem; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
+    }
+
+    .card-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--accent-color); }
+    .card p { color: var(--text-secondary); line-height: 1.8; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .stat-item h3 { font-size: 2.5rem; color: var(--accent-color); font-weight: 800; margin-bottom: 0.5rem; }
+    .stat-item p { color: var(--text-secondary); }
+
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--accent-color); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--text-primary); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      nav { gap: 1rem; }
+      nav a { font-size: 0.85rem; }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="brand">HACYBER<span>GLOBALTECH</span></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/" target="_blank">Legal</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
+  </header>
+
+  <section class="hero">
+    <h1>Web Deployment & Technical Solutions</h1>
+    <p>Professional software deployment, application setup, and digital workflow support for modern businesses.</p>
+    <div class="cta-group">
+      <a href="#services" class="btn btn-primary">Explore Services</a>
+      <a href="#contact" class="btn btn-secondary">Get Started</a>
+    </div>
+  </section>
+
+  <div class="container">
+    <section id="services">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">Comprehensive technical solutions tailored to your needs</p>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <h3>Web Deployment</h3>
+          <p>Fast and reliable deployment of web applications. We handle server setup, configuration, and optimization for production environments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Application Setup</h3>
+          <p>Complete application installation and configuration services. From framework setup to database optimization and security hardening.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Digital Workflow Support</h3>
+          <p>Streamline your business processes with custom digital solutions. API integration, automation, and workflow optimization.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">☁️</div>
+          <h3>Cloud Infrastructure</h3>
+          <p>Enterprise-grade cloud solutions. Scalable, secure, and cost-effective infrastructure management and monitoring.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Security & Compliance</h3>
+          <p>Secure your applications with industry best practices. SSL/TLS, data encryption, and compliance with regulatory standards.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <h3>Technical Consulting</h3>
+          <p>Expert guidance on technology decisions. Architecture planning, technology stack recommendations, and strategic consulting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">Why Choose HACYBERGLOBALTECH</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>Projects Deployed</p>
+        </div>
+        <div class="stat-item">
+          <h3>99.9%</h3>
+          <p>Uptime Guarantee</p>
+        </div>
+        <div class="stat-item">
+          <h3>24/7</h3>
+          <p>Support Available</p>
+        </div>
+        <div class="stat-item">
+          <h3>10+</h3>
+          <p>Years Experience</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="container">
+    <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 3rem; text-align: center;">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Ready to Get Started?</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">Let's discuss your project and find the perfect solution.</p>
+      <div class="cta-group">
+        <a href="https://hacyberglobal.dgdns.org/support" target="_blank" class="btn btn-primary">Contact Support</a>
+        <a href="https://pay.hacyberglobal.dgdns.org/" target="_blank" class="btn btn-secondary">View Payment Portal</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://hacyberglobal.dgdns.org/support" target="_blank">Support</a>
+        <a href="https://hacybertech-pixel.github.io/hacyber-legal-pages/" target="_blank">Legal Documents</a>
+        <a href="mailto:hacybertech@gmail.com">Email Us</a>
+        <a href="#" onclick="scrollToTop()">Back to Top</a>
+      </div>
+      <p>&copy; 2026 HACYBERGLOBALTECH. All rights reserved.</p>
+      <p>Secure | Reliable | Professional Technical Services</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtn = document.getElementById('themeToggle');
+      if (body.getAttribute('data-theme') === 'light') {
+        body.removeAttribute('data-theme');
+        themeBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.setAttribute('data-theme', 'light');
+      document.getElementById('themeToggle').textContent = '🌙';
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
